@@ -250,6 +250,9 @@ class GeneralSettingsDescriptions {
         s.put("colorizeMissingContactPictures", Settings.versions(
             new V(29, new BooleanSetting(true))
         ));
+        s.put("fontFamily", Settings.versions(
+            new V(112, new EnumSetting<>(net.thunderbird.core.preference.AppFontFamily.class, net.thunderbird.core.preference.AppFontFamily.SYSTEM_DEFAULT))
+        ));
         s.put("messageViewDeleteActionVisible", Settings.versions(
             new V(30, new BooleanSetting(true))
         ));

@@ -17,7 +17,7 @@ internal val providerModule = module {
 
     single<ThemeProvider> { K9ThemeProvider() }
 
-    single<FeatureThemeProvider> { K9FeatureThemeProvider() }
+    single<FeatureThemeProvider> { K9FeatureThemeProvider(get()) }
 
     single<NotificationIconResourceProvider> {
         K9AppNotificationIconProvider()

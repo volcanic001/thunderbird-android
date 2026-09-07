@@ -49,4 +49,14 @@
         <item>Full</item>
         <item>ISO</item>
     </string-array>
+
+
+    <string-array name="font_family_entries">
+        <item>@string/font_family_system_default</item>
+        <item>@string/font_family_google_sans_rounded</item>
+    </string-array>
+    <string-array name="font_family_values">
+        <item>SYSTEM_DEFAULT</item>
+        <item>GOOGLE_SANS_ROUNDED_BOLD</item>
+    </string-array>
 </resources>

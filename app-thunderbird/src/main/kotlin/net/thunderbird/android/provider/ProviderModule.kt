@@ -17,7 +17,7 @@ internal val providerModule = module {
 
     single<ThemeProvider> { TbThemeProvider() }
 
-    single<FeatureThemeProvider> { TbFeatureThemeProvider() }
+    single<FeatureThemeProvider> { TbFeatureThemeProvider(get()) }
 
     single<NotificationIconResourceProvider> {
         TbAppIconNotificationProvider()

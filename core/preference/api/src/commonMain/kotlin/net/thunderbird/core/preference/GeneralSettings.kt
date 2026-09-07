@@ -43,6 +43,11 @@ enum class AppTheme {
     FOLLOW_SYSTEM,
 }
 
+enum class AppFontFamily {
+    SYSTEM_DEFAULT,
+    GOOGLE_SANS_ROUNDED_BOLD,
+}
+
 enum class SubTheme {
     LIGHT,
     DARK,

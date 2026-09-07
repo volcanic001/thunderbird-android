@@ -155,6 +155,7 @@ class GeneralSettingsDataStore(
             "language" -> appLanguageManager.getAppLanguage()
             "theme" -> appThemeToString(coreSettings.appTheme)
             "animations" -> animationPreferenceToString(visualSettings.animationPreference)
+            "font_family" -> visualSettings.fontFamily.name
             "message_compose_theme" -> subThemeToString(coreSettings.messageComposeTheme)
             "messageViewTheme" -> subThemeToString(coreSettings.messageViewTheme)
             "messagelist_preview_lines" -> messageListSettings.previewLines.toString()
@@ -196,6 +197,7 @@ class GeneralSettingsDataStore(
 
             "theme" -> setTheme(value)
             "animations" -> setAnimationPreference(stringToAnimationPreference(value))
+            "font_family" -> setFontFamily(net.thunderbird.core.preference.AppFontFamily.valueOf(value))
             "message_compose_theme" -> setMessageComposeTheme(value)
             "messageViewTheme" -> setMessageViewTheme(value)
             "messagelist_preview_lines" -> setMessageListPreviewLines(value.toInt())
@@ -440,6 +442,19 @@ class GeneralSettingsDataStore(
                 display = settings.display.copy(
                     visualSettings = settings.display.visualSettings.copy(
                         animationPreference = animationPreference,
+                    ),
+                ),
+            )
+        }
+    }
+
+    private fun setFontFamily(fontFamily: net.thunderbird.core.preference.AppFontFamily) {
+        skipSaveSettings = true
+        generalSettingsManager.update { settings ->
+            settings.copy(
+                display = settings.display.copy(
+                    visualSettings = settings.display.visualSettings.copy(
+                        fontFamily = fontFamily,
                     ),
                 ),
             )

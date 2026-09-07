@@ -8,6 +8,8 @@ import assertk.assertions.isNull
 import com.fsck.k9.K9RobolectricTest
 import com.fsck.k9.Preferences
 import java.io.ByteArrayOutputStream
+import net.thunderbird.core.preference.AppFontFamily
+import net.thunderbird.core.preference.display.visualSettings.DisplayVisualSettingKey
 import org.jdom2.Document
 import org.jdom2.input.SAXBuilder
 import org.junit.Test
@@ -62,6 +64,20 @@ class SettingsExporterTest : K9RobolectricTest() {
         val document = exportPreferences(false, emptySet())
 
         assertThat(document.rootElement.getChild("global")).isNull()
+    }
+
+    @Test
+    fun exportPreferences_exportsFontFamily() {
+        preferences.createStorageEditor()
+            .putString(DisplayVisualSettingKey.FontFamily.value, AppFontFamily.GOOGLE_SANS_ROUNDED_BOLD.name)
+            .commit()
+
+        val document = exportPreferences(true, emptySet())
+
+        val fontFamily = document.rootElement.getChild("global")
+            .getChildren("value")
+            .single { element -> element.getAttributeValue("key") == "fontFamily" }
+        assertThat(fontFamily.text).isEqualTo(AppFontFamily.GOOGLE_SANS_ROUNDED_BOLD.name)
     }
 
     private fun exportPreferences(globalSettings: Boolean, accounts: Set<String>): Document {

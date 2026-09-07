@@ -9,4 +9,6 @@ internal class TbThemeProvider : ThemeProvider {
     override val appDarkThemeResourceId = R.style.Theme_Thunderbird_Dark
     override val dialogThemeResourceId = R.style.Theme_Thunderbird_DayNight_Dialog
     override val translucentDialogThemeResourceId = R.style.Theme_Thunderbird_DayNight_Dialog_Translucent
+    override val googleSansRoundedBoldFontThemeResourceId =
+        R.style.ThemeOverlay_Thunderbird_Font_GoogleSansRoundedBold
 }

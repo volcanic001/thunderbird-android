@@ -9,4 +9,5 @@ internal class K9ThemeProvider : ThemeProvider {
     override val appDarkThemeResourceId = R.style.Theme_K9_Dark
     override val dialogThemeResourceId = R.style.Theme_K9_DayNight_Dialog
     override val translucentDialogThemeResourceId = R.style.Theme_K9_DayNight_Dialog_Translucent
+    override val googleSansRoundedBoldFontThemeResourceId = R.style.ThemeOverlay_K9_Font_GoogleSansRoundedBold
 }

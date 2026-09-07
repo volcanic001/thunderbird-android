@@ -111,4 +111,9 @@
     <style name="Theme.K9.DayNight.Dialog" parent="Theme.K9.Light.Dialog" />
     <style name="Theme.K9.DayNight.Dialog.Translucent" parent="Theme.K9.Light.Dialog.Translucent" />
 
+    <style name="ThemeOverlay_K9_Font_GoogleSansRoundedBold">
+        <item name="android:fontFamily">@font/google_sans_rounded_bold</item>
+        <item name="fontFamily">@font/google_sans_rounded_bold</item>
+    </style>
+
 </resources>

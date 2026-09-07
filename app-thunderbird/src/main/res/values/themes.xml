@@ -110,4 +110,9 @@
     <style name="Theme.Thunderbird.DayNight" parent="Theme.Thunderbird.Light" />
     <style name="Theme.Thunderbird.DayNight.Dialog" parent="Theme.Thunderbird.Light.Dialog" />
     <style name="Theme.Thunderbird.DayNight.Dialog.Translucent" parent="Theme.Thunderbird.Light.Dialog.Translucent" />
+
+    <style name="ThemeOverlay_Thunderbird_Font_GoogleSansRoundedBold">
+        <item name="android:fontFamily">@font/google_sans_rounded_bold</item>
+        <item name="fontFamily">@font/google_sans_rounded_bold</item>
+    </style>
 </resources>

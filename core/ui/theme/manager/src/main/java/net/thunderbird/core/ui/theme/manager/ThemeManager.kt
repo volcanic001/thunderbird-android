@@ -6,11 +6,13 @@ import androidx.annotation.StyleRes
 import androidx.appcompat.app.AppCompatDelegate
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.plus
+import net.thunderbird.core.preference.AppFontFamily
 import net.thunderbird.core.preference.AppTheme
 import net.thunderbird.core.preference.GeneralSettings
 import net.thunderbird.core.preference.GeneralSettingsManager
@@ -59,6 +61,21 @@ class ThemeManager(
 
     @get:StyleRes
     override val translucentDialogThemeResourceId: Int = themeProvider.translucentDialogThemeResourceId
+
+    val appFontFamily: AppFontFamily
+        get() = generalSettings.display.visualSettings.fontFamily
+
+    val appFontFamilyFlow: Flow<AppFontFamily>
+        get() = generalSettingsManager.getConfigFlow()
+            .map { settings -> settings.display.visualSettings.fontFamily }
+            .distinctUntilChanged()
+
+    @get:StyleRes
+    val appFontThemeResourceId: Int?
+        get() = when (appFontFamily) {
+            AppFontFamily.SYSTEM_DEFAULT -> null
+            AppFontFamily.GOOGLE_SANS_ROUNDED_BOLD -> themeProvider.googleSansRoundedBoldFontThemeResourceId
+        }
 
     fun init() {
         generalSettingsManager.getSettingsFlow()

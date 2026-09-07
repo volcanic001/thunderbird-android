@@ -2,6 +2,8 @@ package net.thunderbird.components.ui.bolt.theme.thunderbird
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.Composable
+import net.thunderbird.components.ui.bolt.resources.Res
+import net.thunderbird.components.ui.bolt.resources.bolt_thunderbird_logo
 import net.thunderbird.components.ui.bolt.theme.BoltTheme
 import net.thunderbird.components.ui.bolt.theme.ThemeColorSchemeVariants
 import net.thunderbird.components.ui.bolt.theme.ThemeConfig
@@ -12,12 +14,11 @@ import net.thunderbird.components.ui.bolt.theme.default.defaultThemeShapes
 import net.thunderbird.components.ui.bolt.theme.default.defaultThemeSizes
 import net.thunderbird.components.ui.bolt.theme.default.defaultThemeSpacings
 import net.thunderbird.components.ui.bolt.theme.default.defaultTypography
-import net.thunderbird.components.ui.bolt.resources.Res
-import net.thunderbird.components.ui.bolt.resources.bolt_thunderbird_logo
 
 @Composable
 fun ThunderbirdBoltTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
+    fontFamily: androidx.compose.ui.text.font.FontFamily = androidx.compose.ui.text.font.FontFamily.SansSerif,
     content: @Composable () -> Unit,
 ) {
     val images = ThemeImages(
@@ -37,7 +38,7 @@ fun ThunderbirdBoltTheme(
         sizes = defaultThemeSizes,
         spacings = defaultThemeSpacings,
         shapes = defaultThemeShapes,
-        typography = defaultTypography,
+        typography = defaultTypography.withFontFamily(fontFamily),
     )
 
     BoltTheme(

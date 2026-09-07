@@ -5,6 +5,7 @@ import net.thunderbird.core.preference.PreferenceManager
 enum class DisplayVisualSettingKey(val value: String) {
 
     Animation("animations"),
+    FontFamily("fontFamily"),
     MessageViewFixedWidthFont("messageViewFixedWidthFont"),
     AutoFitWidth("autofitWidth"),
     MessageViewBodyContentType("messageViewBodyContentType"),

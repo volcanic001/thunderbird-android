@@ -26,6 +26,7 @@ import net.thunderbird.core.preference.storage.getEnumOrDefault
 import net.thunderbird.core.preference.storage.putEnum
 
 private const val TAG = "DefaultDisplayVisualSettingsPreferenceManager"
+private const val LEGACY_FONT_FAMILY_KEY = "font_family"
 
 class DefaultDisplayVisualSettingsPreferenceManager(
     private val logger: Logger,
@@ -62,6 +63,10 @@ class DefaultDisplayVisualSettingsPreferenceManager(
         isUseMessageViewFixedWidthFont = storage.getBoolean(
             DisplayVisualSettingKey.MessageViewFixedWidthFont.value,
             DISPLAY_SETTINGS_DEFAULT_IS_USE_MESSAGE_VIEW_FIXED_WIDTH_FONT,
+        ),
+        fontFamily = storage.getEnumOrDefault(
+            DisplayVisualSettingKey.FontFamily.value,
+            storage.getEnumOrDefault(LEGACY_FONT_FAMILY_KEY, DISPLAY_SETTINGS_DEFAULT_FONT_FAMILY),
         ),
         isAutoFitWidth = storage.getBoolean(
             DisplayVisualSettingKey.AutoFitWidth.value,
@@ -106,6 +111,7 @@ class DefaultDisplayVisualSettingsPreferenceManager(
         scope.launch(ioDispatcher) {
             mutex.withLock {
                 storageEditor.putEnum(DisplayVisualSettingKey.Animation.value, config.animationPreference)
+                storageEditor.putEnum(DisplayVisualSettingKey.FontFamily.value, config.fontFamily)
                 storageEditor.putBoolean(
                     DisplayVisualSettingKey.MessageViewFixedWidthFont.value,
                     config.isUseMessageViewFixedWidthFont,

@@ -201,6 +201,15 @@
                 android:title="@string/animations_title"
                 />
 
+            <ListPreference
+                android:dialogTitle="@string/settings_font_family_label"
+                android:entries="@array/font_family_entries"
+                android:entryValues="@array/font_family_values"
+                android:key="font_family"
+                app:useSimpleSummaryProvider="true"
+                android:title="@string/settings_font_family_label"
+                />
+
         </PreferenceCategory>
 
         <PreferenceCategory

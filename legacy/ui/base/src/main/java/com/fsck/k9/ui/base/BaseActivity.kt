@@ -20,9 +20,13 @@ import androidx.core.view.WindowInsetsCompat.Type.systemBars
 import androidx.core.view.children
 import androidx.core.view.updatePadding
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.lifecycleScope
 import com.fsck.k9.controller.push.PushController
 import java.util.Locale
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlin.math.max
+import net.thunderbird.core.preference.AppFontFamily
 import net.thunderbird.core.ui.theme.api.Theme
 import net.thunderbird.core.ui.theme.manager.ThemeManager
 import org.koin.android.ext.android.inject
@@ -37,6 +41,7 @@ abstract class BaseActivity(
     private val appLanguageManager: AppLanguageManager by inject()
 
     private var overrideLocaleOnLaunch: Locale? = null
+    private lateinit var appFontFamilyOnLaunch: AppFontFamily
 
     override fun attachBaseContext(baseContext: Context) {
         overrideLocaleOnLaunch = appLanguageManager.getOverrideLocale()
@@ -62,6 +67,7 @@ abstract class BaseActivity(
 
         setLayoutDirection()
         listenForAppLanguageChanges()
+        listenForAppFontFamilyChanges()
     }
 
     // On Android 12+ the layout direction doesn't seem to be updated when recreating the activity. This is a problem
@@ -80,12 +86,26 @@ abstract class BaseActivity(
         }
     }
 
+    private fun listenForAppFontFamilyChanges() {
+        themeManager.appFontFamilyFlow
+            .onEach { appFontFamily ->
+                if (appFontFamily != appFontFamilyOnLaunch) {
+                    recreateCompat()
+                }
+            }
+            .launchIn(lifecycleScope)
+    }
+
     private fun initializeTheme() {
         val theme = when (themeType) {
             ThemeType.DEFAULT -> themeManager.appThemeResourceId
             ThemeType.DIALOG -> themeManager.translucentDialogThemeResourceId
         }
         setTheme(theme)
+        appFontFamilyOnLaunch = themeManager.appFontFamily
+        themeManager.appFontThemeResourceId?.let { fontTheme ->
+            getTheme().applyStyle(fontTheme, true)
+        }
     }
 
     private fun initializePushController() {

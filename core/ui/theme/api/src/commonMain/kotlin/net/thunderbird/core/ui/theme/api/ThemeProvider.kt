@@ -17,4 +17,7 @@ interface ThemeProvider {
 
     @get:StyleRes
     val translucentDialogThemeResourceId: Int
+
+    @get:StyleRes
+    val googleSansRoundedBoldFontThemeResourceId: Int
 }
