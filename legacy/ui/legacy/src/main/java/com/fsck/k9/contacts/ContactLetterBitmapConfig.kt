@@ -13,20 +13,13 @@ class ContactLetterBitmapConfig(
     themeManager: ThemeManager,
     messageListPreferencesManager: MessageListPreferencesManager,
 ) {
-    val hasDefaultBackgroundColor: Boolean = !messageListPreferencesManager.getConfig().isColorizeMissingContactPictures
+    val hasDefaultBackgroundColor: Boolean = true
     val defaultBackgroundColor: Int
-    val backgroundColors: IntArray
+    val backgroundColors: IntArray = intArrayOf()
 
     init {
         val themedContext = ContextThemeWrapper(context, themeManager.appThemeResourceId)
         val theme = themedContext.theme
-
-        if (hasDefaultBackgroundColor) {
-            defaultBackgroundColor = theme.resolveColorAttribute(R.attr.contactPictureFallbackDefaultBackgroundColor)
-            backgroundColors = intArrayOf()
-        } else {
-            defaultBackgroundColor = 0
-            backgroundColors = theme.getIntArray(R.attr.contactPictureFallbackBackgroundColors)
-        }
+        defaultBackgroundColor = theme.resolveColorAttribute(R.attr.contactPictureFallbackDefaultBackgroundColor)
     }
 }

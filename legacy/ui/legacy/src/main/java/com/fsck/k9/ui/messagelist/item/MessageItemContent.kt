@@ -135,7 +135,7 @@ internal fun MessageListItem.toMessageItemUi(
             showContactPicture && url != null -> Avatar.Image(url = url)
             else -> Avatar.Monogram(monogram)
         },
-        color = Color(contactColor),
+        color = null,
     ),
     subject = subject ?: "n/a",
     excerpt = previewText,
