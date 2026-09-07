@@ -18,15 +18,7 @@ import androidx.compose.foundation.text.InlineTextContent
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawWithCache
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.geometry.Rect
-import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Outline
-import androidx.compose.ui.graphics.drawOutline
 import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import kotlinx.collections.immutable.ImmutableMap
 import net.thunderbird.components.ui.bolt.atom.Surface
@@ -112,8 +104,7 @@ internal fun MessageItem(
 ) {
     Surface(
         modifier = modifier
-            .combinedClickable(onClick = onClick, onLongClick = onLongClick)
-            .borderBottom(width = 1.dp, color = BoltTheme.colors.outlineVariant),
+            .combinedClickable(onClick = onClick, onLongClick = onLongClick),
         color = colors.containerColor,
         contentColor = colors.contentColor,
     ) {
@@ -179,22 +170,6 @@ internal fun MessageItem(
         }
     }
 }
-
-private fun Modifier.borderBottom(width: Dp, color: Color): Modifier = this then Modifier
-    .drawWithCache {
-        onDrawWithContent {
-            drawContent()
-            drawOutline(
-                outline = Outline.Rectangle(
-                    rect = Rect(
-                        offset = Offset(x = 0f, y = size.height - width.toPx()),
-                        size = Size(width = size.width, height = width.toPx()),
-                    ),
-                ),
-                color = color,
-            )
-        }
-    }
 
 @Composable
 private fun LeadingElements(
