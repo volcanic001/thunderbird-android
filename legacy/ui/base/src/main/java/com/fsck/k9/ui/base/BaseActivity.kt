@@ -43,6 +43,8 @@ abstract class BaseActivity(
     private var overrideLocaleOnLaunch: Locale? = null
     private lateinit var appFontFamilyOnLaunch: AppFontFamily
 
+    protected open val drawContentBehindNavigationBar: Boolean = false
+
     override fun attachBaseContext(baseContext: Context) {
         overrideLocaleOnLaunch = appLanguageManager.getOverrideLocale()
 
@@ -154,12 +156,12 @@ abstract class BaseActivity(
             contentContainer.updatePadding(
                 left = insets.left,
                 right = insets.right,
-                bottom = max(insets.bottom, imeInsets.bottom),
+                bottom = if (drawContentBehindNavigationBar) 0 else max(insets.bottom, imeInsets.bottom),
             )
 
             hideActionModeStatusGuard()
 
-            WindowInsetsCompat.CONSUMED
+            if (drawContentBehindNavigationBar) windowInsets else WindowInsetsCompat.CONSUMED
         }
     }
 

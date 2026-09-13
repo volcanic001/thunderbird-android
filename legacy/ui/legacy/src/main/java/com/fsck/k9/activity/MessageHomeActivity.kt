@@ -107,6 +107,8 @@ open class MessageHomeActivity :
     FragmentManager.OnBackStackChangedListener,
     OnSwitchCompleteListener {
 
+    override val drawContentBehindNavigationBar: Boolean = true
+
     private val preferences: Preferences by inject()
     private val accountManager: LegacyAccountDtoManager by inject()
     private val defaultFolderProvider: DefaultFolderProvider by inject()

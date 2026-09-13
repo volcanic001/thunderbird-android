@@ -505,7 +505,7 @@ class MessageListFragment :
             v.updateLayoutParams<ViewGroup.MarginLayoutParams> {
                 val fabMargin = view.resources.getDimensionPixelSize(R.dimen.floatingActionButtonMargin)
 
-                bottomMargin = fabMargin
+                bottomMargin = fabMargin + insets.bottom
                 rightMargin = fabMargin + insets.right
                 leftMargin = fabMargin + insets.left
             }

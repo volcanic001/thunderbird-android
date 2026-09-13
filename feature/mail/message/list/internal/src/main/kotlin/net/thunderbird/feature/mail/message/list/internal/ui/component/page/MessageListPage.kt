@@ -1,7 +1,7 @@
 package net.thunderbird.feature.mail.message.list.internal.ui.component.page
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import net.thunderbird.components.ui.bolt.molecule.PullToRefreshBox
@@ -26,11 +26,14 @@ internal fun MessageListScope.MessageListPage(
         PullToRefreshBox(
             isRefreshing = (state as? MessageListState.LoadingMessages)?.isPullToRefresh == true,
             onRefresh = { dispatchEvent(MessageListEvent.Refresh) },
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues),
+            modifier = Modifier.fillMaxSize(),
         ) {
-            MessageList(state = state, dispatchEvent = dispatchEvent, modifier = Modifier.fillMaxSize())
+            MessageList(
+                state = state,
+                dispatchEvent = dispatchEvent,
+                contentPadding = PaddingValues(bottom = paddingValues.calculateBottomPadding()),
+                modifier = Modifier.fillMaxSize(),
+            )
         }
     }
 }

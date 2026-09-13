@@ -40,6 +40,7 @@ const val TEST_TAG_MESSAGE_LIST_ROOT = "TestMessageList_Root"
 internal fun MessageListScope.MessageList(
     state: MessageListState,
     dispatchEvent: (MessageListEvent) -> Unit,
+    contentPadding: PaddingValues = PaddingValues(),
     modifier: Modifier = Modifier,
 ) {
     val listState = rememberMessageListLazyState(state, dispatchEvent)
@@ -52,7 +53,9 @@ internal fun MessageListScope.MessageList(
     LazyColumn(
         modifier = modifier.testTag(TEST_TAG_MESSAGE_LIST_ROOT),
         state = listState,
-        contentPadding = PaddingValues(bottom = BoltTheme.sizes.large),
+        contentPadding = PaddingValues(
+            bottom = contentPadding.calculateBottomPadding() + BoltTheme.sizes.large,
+        ),
     ) {
         items(
             items = state.messages,
